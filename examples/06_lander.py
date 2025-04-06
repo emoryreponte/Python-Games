@@ -45,13 +45,13 @@ def draw_lander(screen, position, angle):
 running = True
 while running:
     # Handle events
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+    for event in pygame.event.get():                                            
+        if event.type == pygame.QUIT:  
             running = False
 
 
     # Stop the lander at the bottom of the screen
-    if lander_pos.y >= HEIGHT - (lander_h/2):  # 37.5 is half the height of the scaled lander
+    if lander_pos.y >= HEIGHT - (lander_h/2):  #.    37.5 is half the height of the scaled lander
         lander_pos.y = HEIGHT - (lander_h/2)
         lander_velocity = pygame.Vector2(0, 0)
 
