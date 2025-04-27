@@ -67,6 +67,7 @@ class Obstacle(pygame.sprite.Sprite):
         self.image = self.explosion
         self.image = pygame.transform.scale(self.image, (OBSTACLE_WIDTH, OBSTACLE_HEIGHT))
         self.rect = self.image.get_rect(center=self.rect.center)
+        pygame.quit()
 
 
 # Define a player class
@@ -79,6 +80,9 @@ class Player(pygame.sprite.Sprite):
         self.rect.x = 50
         self.rect.y = HEIGHT - PLAYER_SIZE - 10
         self.speed = player_speed
+        gravity: float = 0.3 # acelleration, the change in velocity per frame
+        jump_velocity: int = 15 
+
 
     def update(self):
         keys = pygame.key.get_pressed()
@@ -92,6 +96,10 @@ class Player(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
+
+    #gravity:
+        #self_y_velocity += self.gravity
+        #self.y += self_y_velocity
 
 # Create a player object
 player = Player()
@@ -146,7 +154,9 @@ def game_loop():
         collider = pygame.sprite.spritecollide(player, obstacles, dokill=False)
         if collider:
             collider[0].explode()
-       
+
+
+
         # Draw everything
         screen.fill(WHITE)
         pygame.draw.rect(screen, BLUE, player)
@@ -164,3 +174,4 @@ def game_loop():
 
 if __name__ == "__main__":
     game_loop()
+    

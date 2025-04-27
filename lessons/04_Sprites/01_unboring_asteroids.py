@@ -1,6 +1,14 @@
 import pygame
 import math
 
+#class asteroid:
+   # def __init__(self, position, angle, settings):
+
+    #def move(self):
+        #self.position += self.direction * 2  
+
+    #def draw(self, surface):
+        #pygame.draw.circle(surface, self.settings.colors['brown'], (int(self.position.x), int(self.position.y)), 30)
 # Settings class to store game configuration
 class Settings:
     def __init__(self):

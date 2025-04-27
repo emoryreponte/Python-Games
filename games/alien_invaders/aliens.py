@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env pythonffad
 """ pygame.examples.aliens
 
 Shows a mini game where you have to defend against aliens.
