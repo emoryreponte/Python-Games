@@ -97,9 +97,9 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > HEIGHT:
             self.rect.bottom = HEIGHT
 
-    #gravity:
-        #self_y_velocity += self.gravity
-        #self.y += self_y_velocity
+    def gravity(self):
+        self_y_velocity += self.gravity
+        self.y += self_y_velocity
 
 # Create a player object
 player = Player()

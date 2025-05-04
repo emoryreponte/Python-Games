@@ -1,0 +1,44 @@
+class Person:
+    """Person represents a person in our system."""
+
+     # This is the initializer, it gets run when we create a new object
+    def __init__(self, name: str, age: int):
+        """Initializes a new Person object."""
+        self.name = name
+        self.age = age
+
+    def say_hello(self, message: str):
+        """Prints a greeting to the console."""
+        print(f"Hello, my name is {self.name} and I am {self.age} years old. {message}")
+
+class Parent(Person):
+    """Parent represents a parent in our system."""
+
+    def __init__(self, name: str, age: int, children: list):
+        """Initializes a new Parent object."""
+        super().__init__(name, age)
+        self.children = children
+
+    def say_hello(self, message: str):
+        """Prints a greeting to the console."""
+        
+        super().say_hello(message)
+        print(f"I have {len(self.children)} children.")
+
+        if len(self.children) > 0:
+            print("Their names are:")
+            for child in self.children:
+                print(f"  {child}")
+            
+class Child(Person):
+    """Child represents a child in our system."""
+
+    def __init__(self, name: str, age: int, parents: list):
+        """Initializes a new Child object."""
+        super().__init__(name, age)  # Call Person.__init__ to initialize the name and age attributes
+        self.parents = parents
+
+    def say_hello(self, message: str):
+        """Prints a greeting to the console."""
+        super().say_hello(message)
+        print(f"My parents are {', '.join([parent.name for parent in self.parents])}")
