@@ -2,22 +2,27 @@ class Person:
     """Person represents a person in our system."""
 
      # This is the initializer, it gets run when we create a new object
-    def __init__(self, name: str, age: int):
+    def __init__(self, firstname: str, lastname: str, age: int):
         """Initializes a new Person object."""
-        self.name = name
+        self.firstname = firstname
+        self.lastname = lastname
         self.age = age
 
     def say_hello(self, message: str):
         """Prints a greeting to the console."""
-        print(f"Hello, my name is {self.name} and I am {self.age} years old. {message}")
+        print(f"Hello, my name is {self.firstname} {self.lastname} and I am {self.age} years old. {message}")
+
+    def printfullname(self):
+        print(f"{self.firstname} {self.lastname}.")
 
 class Parent(Person):
     """Parent represents a parent in our system."""
 
-    def __init__(self, name: str, age: int, children: list):
+    def __init__(self, firstname: str, lastname: str, age: int, children: list):
         """Initializes a new Parent object."""
-        super().__init__(name, age)
+        super().__init__(firstname, lastname, age)
         self.children = children
+
 
     def say_hello(self, message: str):
         """Prints a greeting to the console."""
@@ -28,17 +33,36 @@ class Parent(Person):
         if len(self.children) > 0:
             print("Their names are:")
             for child in self.children:
-                print(f"  {child}")
+                print(f"  {child.firstname} {child.lastname}")
+    
+    def add_child(self, children):
+        self.children.append(children)
             
 class Child(Person):
     """Child represents a child in our system."""
 
-    def __init__(self, name: str, age: int, parents: list):
+    def __init__(self, firstname: str, lastname: str, age: int, parents: list ):
         """Initializes a new Child object."""
-        super().__init__(name, age)  # Call Person.__init__ to initialize the name and age attributes
+        super().__init__(firstname, lastname, age)  # Call Person.__init__ to initialize the name and age attributes
         self.parents = parents
 
     def say_hello(self, message: str):
         """Prints a greeting to the console."""
         super().say_hello(message)
-        print(f"My parents are {', '.join([parent.name for parent in self.parents])}")
+        print(f"My parents are {', '.join([parent.firstname + " " + parent.lastname for parent in self.parents])}")
+        
+mom = Parent("Alice", "wells", 38, [])
+dad = Parent("Bob", "wells", 40, [])
+
+charlie = Child("Charlie", "wells", 10, [mom, dad])
+dahlia = Child("Dahlia", "wells", 8, [mom, dad])
+
+# Connect the children to the parents
+mom.add_child(charlie)
+mom.add_child(dahlia)
+dad.add_child(charlie)
+dad.add_child(dahlia)
+
+mom.say_hello("Hello!") # Call the say_hello method of the mom object
+print()
+dahlia.say_hello("Yo!")
