@@ -22,18 +22,33 @@ class Parent(Person):
         """Initializes a new Parent object."""
         super().__init__(firstname, lastname, age)
         self.children = children
-
-
+        
     def say_hello(self, message: str):
         """Prints a greeting to the console."""
         
         super().say_hello(message)
         print(f"I have {len(self.children)} children.")
+        print()
 
         if len(self.children) > 0:
             print("Their names are:")
             for child in self.children:
                 print(f"  {child.firstname} {child.lastname}")
+
+
+    def print_family(self, message: str):
+        self.say_hello("Hello!")
+        print()
+        for child in self.children:
+            child.say_hello("Hi!")
+            print()
+        for parent in self.children[0].parents:
+            if not(parent.firstname==self.firstname):
+                parent.say_hello("Nefarious")
+            
+
+
+
     
     def add_child(self, children):
         self.children.append(children)
@@ -45,11 +60,16 @@ class Child(Person):
         """Initializes a new Child object."""
         super().__init__(firstname, lastname, age)  # Call Person.__init__ to initialize the name and age attributes
         self.parents = parents
+        for p in parents:
+            p.add_child(self)
 
     def say_hello(self, message: str):
         """Prints a greeting to the console."""
         super().say_hello(message)
         print(f"My parents are {', '.join([parent.firstname + " " + parent.lastname for parent in self.parents])}")
+
+
+    
         
 mom = Parent("Alice", "wells", 38, [])
 dad = Parent("Bob", "wells", 40, [])
@@ -57,12 +77,8 @@ dad = Parent("Bob", "wells", 40, [])
 charlie = Child("Charlie", "wells", 10, [mom, dad])
 dahlia = Child("Dahlia", "wells", 8, [mom, dad])
 
-# Connect the children to the parents
-mom.add_child(charlie)
-mom.add_child(dahlia)
-dad.add_child(charlie)
-dad.add_child(dahlia)
+# Connect the children to the parents 
+# Call the say_hello method of the mom object
 
-mom.say_hello("Hello!") # Call the say_hello method of the mom object
+mom.print_family("Hello!")
 print()
-dahlia.say_hello("Yo!")
