@@ -38,13 +38,28 @@ class Turtle:
         # Update the turtle's position
         self.x += dx
         self.y -= dy
+        color = (255, 0, 0)
 
+        #pygame.draw.line(self.screen, color, (start_x, start_y), (self.x, self.y), 2)
         # Draw line to the new position
-        pygame.draw.line(self.screen, black, (start_x, start_y), (self.x, self.y), 2)
+    def pendown(self, distance):
+        start_x = self.x  # Save the starting position
+        start_y = self.y
+        radian_angle = math.radians(self.angle)
+        dx = math.cos(radian_angle) * distance
+        dy = math.sin(radian_angle) * distance
+        self.x += dx
+        self.y -= dy
+        color = (255, 0, 0)
+        pygame.draw.line(self.screen, color, (start_x, start_y), (self.x, self.y), 2)
 
     def left(self, angle):
         # Turn left by adjusting the angle counterclockwise
         self.angle = (self.angle + angle) % 360
+
+    def right(self, angle):
+        self.angle = (self.angle + angle) % 360
+    
 
 
 # Main loop
@@ -66,7 +81,8 @@ turtle = Turtle(screen, screen.get_width() // 2, screen.get_height() // 2)  # St
 
 # Draw a square using turtle-style commands
 for _ in range(4):
-    turtle.forward(100)  # Move forward by 100 pixels
+    turtle.pendown(100)
+    turtle.forward(0) # Move forward by 100 pixels
     turtle.left(90)  # Turn left by 90 degrees
 
 # Display the drawing
