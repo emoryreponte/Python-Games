@@ -22,10 +22,6 @@ class GameSettings:
     width: int = 500
     height: int = 500
     gravity: float = 0.3
-    player_start_x: int = 100
-    player_start_y: int = None
-    player_v_y: float = 0  # Initial y velocity
-    player_v_x: float = 7  # Initial x velocity
     player_width: int = 20
     player_height: int = 20
     player_jump_velocity: float = 15
@@ -75,6 +71,10 @@ class Player:
     """Player class, just a bouncing rectangle"""
 
     def __init__(self, game: Game):
+        player_start_x: int = 100
+        player_start_y: int = None
+        player_v_y: float = 0  # Initial y velocity
+        player_v_x: float = 7  # Initial x velocity
         self.game = game
         settings = game.settings
 
