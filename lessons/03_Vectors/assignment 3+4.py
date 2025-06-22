@@ -199,7 +199,7 @@ class Player:
         v0 = Vector20Factory(self.pos.x, self.pos.y)
 
         pygame.draw.rect(screen, Colors.PLAYER_COLOR, (self.pos.x, self.pos.y, self.width, self.height))
-        pygame.draw.line(screen, Colors.BLACK, (self.pos.x + self.vel.x, self.pos.y + self.vel.y), (self.pos.x, self.pos.y))
+        pygame.draw.line(screen, Colors.BLACK, (self.pos.x + (self.vel.x + 5), self.pos.y + (self.vel.y - 5)), (self.pos.x, self.pos.y))
 
     def space_pressed(self):
         keys=pygame.key.get_pressed()
